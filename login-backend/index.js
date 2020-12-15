@@ -27,10 +27,10 @@ app.use(bodyParser.urlencoded({extended: true}));
    la constante apiRouter
    /api va ha ser el punto de entrada para la Api
 */
-
 app.use('/api', apiRouter);
 
-
+/* Configura puerto dinámico */
+app.set('port', process.env.PORT || 3000);
 const controller = require('./controllers/UsuarioController');
 app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
@@ -38,6 +38,6 @@ app.use(function(req, res, next) {
    next();
 });
 
-app.listen(3000, ()=> {
+app.listen(app.get('port'), ()=> {
     console.log('Server up');
 })
